@@ -1,0 +1,54 @@
+import static com.pedropathing.api.Paths.*;
+import com.pedropathing.api.Paths;
+
+import com.pedropathing.api.PoseFactory;
+import com.pedropathing.math.Pose;
+import com.pedropathing.paths.Path;
+
+public class Paths {
+
+    private final PoseFactory poseFactory = PoseFactory.degrees();
+
+    private final Pose start = poseFactory.of(133.0367, 8.7983, 90);
+    private final Pose path1 = poseFactory.of(57.7962, 24.225, 90);
+    private final Pose point2 = poseFactory.of(85.6283, 11.8681, -23.9401);
+    private final Pose point3Start = poseFactory.of(85.6283, 11.8681, -24);
+    private final Pose point3 = poseFactory.of(57.7687, 23.9443, 90);
+    private final Pose point4 = poseFactory.of(45.2779, 129.5141, 74.4688);
+    private final Pose point4Control1 = poseFactory.of(5.3815, 41.6283, 0);
+    private final Pose point4Control2 = poseFactory.of(39.488, 108.1234, 0);
+    private final Pose point5 = poseFactory.of(42.2461, 119.1001, 73.7686);
+    private final Pose point6Start = poseFactory.of(42.2461, 119.1001, -20);
+    private final Pose point6 = poseFactory.of(57.7941, 109.3251, 270);
+    private final Pose point7 = poseFactory.of(131.89, 36.488, 178.7271);
+    private final Pose point7Control1 = poseFactory.of(137.4168, 121.2299, 0);
+    private final Pose point7Control2 = poseFactory.of(117.4824, 35.9485, 0);
+
+    public Path path1() {
+        return Paths.line(start, path1).linear(start, path1);
+    }
+
+    public Path path2() {
+        return Paths.line(path1, point2).tangent();
+    }
+
+    public Path path3() {
+        return Paths.line(point3Start, point3).linear(point3Start, point3);
+    }
+
+    public Path path4() {
+        return Paths.curve(point3, point4Control1, point4Control2, point4).tangent();
+    }
+
+    public Path path5() {
+        return Paths.line(point4, point5).reverseTangent();
+    }
+
+    public Path path6() {
+        return Paths.line(point6Start, point6).linear(point6Start, point6);
+    }
+
+    public Path path7() {
+        return Paths.curve(point6, point7Control1, point7Control2, point7).reverseTangent();
+    }
+}
